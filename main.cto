@@ -1,0 +1,86 @@
+/**
+  * A business network for registration of User & Service, verification of Identities and
+  * Role-based access control for permissioned data.
+  */
+
+namespace org.lockerney.main
+
+enum TransferStatus {
+  o TRANSFERED
+  o RETAINED
+}
+
+concept Address {
+  o String addressLine1
+  o String addressLine2
+  o String city
+  o String state
+  o String country
+  o String zipcode
+} 
+
+/**
+ * User participant
+ */
+participant User identified by userId {
+  o String userId
+}
+
+/**
+ * Service participant
+ */
+participant Service identified by serviceId {
+  o String serviceId
+}
+
+/**
+ * Whole package of data will be an asset
+ */
+asset DataPackage identified by userId {
+  o String userId
+  o String name
+  o String dateOfBirth
+  o String socialSecurityNo
+  o String memberIdNo
+  o String emailAddress
+  o Address mailingAddress
+  o String telephoneNo
+  o String bankAccNo
+  o String clinicalInfo
+  o String claimsInfo
+  o TransferStatus dataPackageStatus
+}
+
+/**
+ * Role based access control data will be an asset
+ */
+asset DataPartial identified by userId {
+  o String userId
+  o String name
+  o String dateOfBirth
+  o String socialSecurityNo optional
+  o String memberIdNo optional
+  o String emailAddress optional
+  o Address mailingAddress optional
+  o String telephoneNo optional
+  o String bankAccNo optional
+  o String clinicalInfo optional
+  o String claimsInfo optional
+  o TransferStatus dataAccessStatus
+}
+
+/**
+ * 
+ */
+abstract transaction DataTransfer {
+  o String details
+}
+
+transaction initialDataTransfer extends DataTransfer {
+}
+
+transaction requestDataTransfer extends DataTransfer {
+}
+
+transaction permission extends DataTransfer {
+}
