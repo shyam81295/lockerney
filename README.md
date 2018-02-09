@@ -1,5 +1,5 @@
-# lockerney
+# Lockerney
 Lockerney aims to leverage blockchain technology for preventing the misuse of online credentials.
 
-# License
+## License
 This project is licensed under the terms of the MIT license.
