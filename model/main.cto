@@ -6,8 +6,8 @@
 namespace org.lockerney.main
 
 enum TransferStatus {
-  o TRANSFERED
   o RETAINED
+  o TRANSFERED
 }
 
 concept Address {
@@ -36,7 +36,7 @@ participant Service identified by serviceId {
 /**
  * Whole package of data will be an asset
  */
-asset DataPackage identified by userId {
+asset UserDataPackage identified by userId {
   o String userId
   o String name
   o String dateOfBirth
@@ -54,7 +54,7 @@ asset DataPackage identified by userId {
 /**
  * Role based access control data will be an asset
  */
-asset DataPartial identified by userId {
+asset permissionsDataPartial identified by userId {
   o String userId
   o String name
   o String dateOfBirth
@@ -69,18 +69,19 @@ asset DataPartial identified by userId {
   o TransferStatus dataAccessStatus
 }
 
-/**
- * 
- */
-abstract transaction DataTransfer {
+transaction transferAddress {
+  o Address address
+}
+
+transaction userDataPackageTransfer {
+  --> UserDataPackage userDataPackage
   o String details
 }
 
-transaction initialDataTransfer extends DataTransfer {
+transaction userDataVerification {
+  o String details
 }
 
-transaction requestDataTransfer extends DataTransfer {
-}
-
-transaction permission extends DataTransfer {
+transaction permission {
+  o String details
 }
