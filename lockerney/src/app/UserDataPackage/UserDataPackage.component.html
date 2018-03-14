@@ -1,0 +1,453 @@
+<div class="modal fade" id="addAssetModal" tabindex="-1" role="dialog" aria-labelledby="addAssetModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addAssetModalLabel">Add Asset</h4>
+      </div>
+      <form [formGroup]="myForm">
+        <div class="modal-body">
+
+
+          
+
+            
+              <div class="form-group text-left">
+                <label for="userId">userId</label>
+                
+                  <input formControlName="userId" type="text" class="form-control">
+                
+              </div>
+            
+          
+
+            
+              <div class="form-group text-left">
+                <label for="name">name</label>
+                
+                  <input formControlName="name" type="text" class="form-control">
+                
+              </div>
+            
+          
+
+            
+              <label for="dataPackageStatus">dataPackageStatus</label>
+              <div class="checkbox">
+                
+                  <label>
+                    <input
+                      
+                        formControlName="dataPackageStatus"
+                      
+                      name="dataPackageStatus"
+                      value="RETAINED"
+                      type="radio"
+                      
+                    />
+                    RETAINED
+                  </label>
+                
+                  <label>
+                    <input
+                      
+                        formControlName="dataPackageStatus"
+                      
+                      name="dataPackageStatus"
+                      value="TRANSFERED"
+                      type="radio"
+                      
+                    />
+                    TRANSFERED
+                  </label>
+                
+              </div>
+            
+          
+
+            
+              <div class="form-group text-left">
+                <label for="dateOfBirth">dateOfBirth</label>
+                
+                  <input formControlName="dateOfBirth" type="text" class="form-control">
+                
+              </div>
+            
+          
+
+            
+              <div class="form-group text-left">
+                <label for="socialSecurityNo">socialSecurityNo</label>
+                
+                  <input formControlName="socialSecurityNo" type="text" class="form-control">
+                
+              </div>
+            
+          
+
+            
+              <div class="form-group text-left">
+                <label for="memberIdNo">memberIdNo</label>
+                
+                  <input formControlName="memberIdNo" type="text" class="form-control">
+                
+              </div>
+            
+          
+
+            
+              <div class="form-group text-left">
+                <label for="emailAddress">emailAddress</label>
+                
+                  <input formControlName="emailAddress" type="text" class="form-control">
+                
+              </div>
+            
+          
+
+            
+              <div class="form-group text-left">
+                <label for="mailingAddress">mailingAddress</label>
+                
+                    <textarea formControlName="mailingAddress" class="form-control" rows="3"></textarea>
+                
+              </div>
+            
+          
+
+            
+              <div class="form-group text-left">
+                <label for="telephoneNo">telephoneNo</label>
+                
+                  <input formControlName="telephoneNo" type="text" class="form-control">
+                
+              </div>
+            
+          
+
+            
+              <div class="form-group text-left">
+                <label for="bankAccNo">bankAccNo</label>
+                
+                  <input formControlName="bankAccNo" type="text" class="form-control">
+                
+              </div>
+            
+          
+
+            
+              <div class="form-group text-left">
+                <label for="clinicalInfo">clinicalInfo</label>
+                
+                  <input formControlName="clinicalInfo" type="text" class="form-control">
+                
+              </div>
+            
+          
+
+            
+              <div class="form-group text-left">
+                <label for="claimsInfo">claimsInfo</label>
+                
+                  <input formControlName="claimsInfo" type="text" class="form-control">
+                
+              </div>
+            
+          
+
+        </div>
+        <div class="modal-footer">
+          <button (click)="addAsset(myForm);" type="submit" class="btn btn-success" data-dismiss="modal">Submit</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="updateAssetModal" tabindex="-1" role="dialog" aria-labelledby="updateAssetModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="updateAssetModalLabel">Update Asset</h4>
+      </div>
+      <form [formGroup]="myForm">
+        <div class="modal-body">
+
+
+          
+            <div class="form-group text-left">
+              <label for="userId">userId</label>
+
+              
+                <input [ngModel]="userId"formControlName="userId" type="text" class="form-control">
+              
+
+            </div>
+          
+            <div class="form-group text-left">
+              <label for="name">name</label>
+
+              
+                <input [ngModel]="name"formControlName="name" type="text" class="form-control">
+              
+
+            </div>
+          
+            <div class="form-group text-left">
+              <label for="dataPackageStatus">dataPackageStatus</label>
+
+              
+                
+                  <div class="row">
+                    <div class="col-xs-12 checkbox">
+                    
+                      <label>
+                        <input
+                          
+                            formControlName="dataPackageStatus"
+                            [ngModel]="dataPackageStatus"
+                          
+                          name="dataPackageStatus"
+                          value="RETAINED"
+                          type="radio"
+                          
+                        />
+                        RETAINED
+                      </label>
+                    
+                      <label>
+                        <input
+                          
+                            formControlName="dataPackageStatus"
+                            [ngModel]="dataPackageStatus"
+                          
+                          name="dataPackageStatus"
+                          value="TRANSFERED"
+                          type="radio"
+                          
+                        />
+                        TRANSFERED
+                      </label>
+                    
+                    </div>
+                  </div>
+                
+              
+
+            </div>
+          
+            <div class="form-group text-left">
+              <label for="dateOfBirth">dateOfBirth</label>
+
+              
+                <input [ngModel]="dateOfBirth"formControlName="dateOfBirth" type="text" class="form-control">
+              
+
+            </div>
+          
+            <div class="form-group text-left">
+              <label for="socialSecurityNo">socialSecurityNo</label>
+
+              
+                <input [ngModel]="socialSecurityNo"formControlName="socialSecurityNo" type="text" class="form-control">
+              
+
+            </div>
+          
+            <div class="form-group text-left">
+              <label for="memberIdNo">memberIdNo</label>
+
+              
+                <input [ngModel]="memberIdNo"formControlName="memberIdNo" type="text" class="form-control">
+              
+
+            </div>
+          
+            <div class="form-group text-left">
+              <label for="emailAddress">emailAddress</label>
+
+              
+                <input [ngModel]="emailAddress"formControlName="emailAddress" type="text" class="form-control">
+              
+
+            </div>
+          
+            <div class="form-group text-left">
+              <label for="mailingAddress">mailingAddress</label>
+
+              
+                
+                  <textarea [ngModel]="mailingAddress" formControlName="mailingAddress" class="form-control" rows="3"></textarea>
+                
+              
+
+            </div>
+          
+            <div class="form-group text-left">
+              <label for="telephoneNo">telephoneNo</label>
+
+              
+                <input [ngModel]="telephoneNo"formControlName="telephoneNo" type="text" class="form-control">
+              
+
+            </div>
+          
+            <div class="form-group text-left">
+              <label for="bankAccNo">bankAccNo</label>
+
+              
+                <input [ngModel]="bankAccNo"formControlName="bankAccNo" type="text" class="form-control">
+              
+
+            </div>
+          
+            <div class="form-group text-left">
+              <label for="clinicalInfo">clinicalInfo</label>
+
+              
+                <input [ngModel]="clinicalInfo"formControlName="clinicalInfo" type="text" class="form-control">
+              
+
+            </div>
+          
+            <div class="form-group text-left">
+              <label for="claimsInfo">claimsInfo</label>
+
+              
+                <input [ngModel]="claimsInfo"formControlName="claimsInfo" type="text" class="form-control">
+              
+
+            </div>
+          
+
+
+        </div>
+        <div class="modal-footer">
+          <button (click)="updateAsset(myForm)" type="submit" class="btn btn-success" data-dismiss="modal">Submit</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="deleteAssetModal" tabindex="-1" role="dialog" aria-labelledby="deleteAssetModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="deleteAssetModalLabel">Delete Asset</h4>
+      </div>
+      <form [formGroup]="myForm" (ngSubmit)="deleteAsset()">
+        <div class="modal-body">
+          Are you sure you want to delete this asset?
+        </div>
+        <div class="modal-footer">
+          <button (click)="deleteAsset()" type="submit" class="btn btn-danger" data-dismiss="modal">Yes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+	<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+		<strong>Error:</strong> {{errorMessage}}
+	</div>
+  <h1 id='assetName'>UserDataPackage</h1>
+  <div class="row">
+    <div class="col-md-12 text-right">
+      <button (click)="resetForm()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addAssetModal">Add Asset</button>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-bordered table-responsive table-striped">
+        <thead class="thead">
+          <tr class="thead-cols">
+            
+                <th class="info">userId</th>
+            
+                <th class="info">name</th>
+            
+                <th class="info">dataPackageStatus</th>
+            
+                <th class="info">dateOfBirth</th>
+            
+                <th class="info">socialSecurityNo</th>
+            
+                <th class="info">memberIdNo</th>
+            
+                <th class="info">emailAddress</th>
+            
+                <th class="info">mailingAddress</th>
+            
+                <th class="info">telephoneNo</th>
+            
+                <th class="info">bankAccNo</th>
+            
+                <th class="info">clinicalInfo</th>
+            
+                <th class="info">claimsInfo</th>
+            
+              <th class="info">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let asset of allAssets">
+
+            
+                <td>{{asset.userId}}</td>
+            
+                <td>{{asset.name}}</td>
+            
+                <td>{{asset.dataPackageStatus}}</td>
+            
+                <td>{{asset.dateOfBirth}}</td>
+            
+                <td>{{asset.socialSecurityNo}}</td>
+            
+                <td>{{asset.memberIdNo}}</td>
+            
+                <td>{{asset.emailAddress}}</td>
+            
+                <td>{{asset.mailingAddress}}</td>
+            
+                <td>{{asset.telephoneNo}}</td>
+            
+                <td>{{asset.bankAccNo}}</td>
+            
+                <td>{{asset.clinicalInfo}}</td>
+            
+                <td>{{asset.claimsInfo}}</td>
+            
+            <td>
+              <button (click)="getForm(asset.userId);" type="button" class="btn btn-success" data-toggle="modal" data-target="#updateAssetModal">Update Asset</button>
+
+              <button (click)="setId(asset.userId);" type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAssetModal">Delete Asset</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

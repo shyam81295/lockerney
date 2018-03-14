@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+
+        
+        $(document).ready(function () {
+            $("button").click(function () {
+                var dataOwner = {
+                    "$class": "org.lockerney.main.UserDataPackage",
+                    "userId": $('#userid').val(),
+                    "name": $('#name').val(),
+                    "dataPackageStatus": "TRANSFERED",
+                    "dateOfBirth": $('#dob').val(),
+                    "socialSecurityNo": $('#ssno').val(),
+                    "memberIdNo": $('#memid').val(),
+                    "emailAddress": $('#email').val(),
+                    "mailingAddress": {
+                        "$class": "org.lockerney.main.Address",
+                        "addressLine1": $('#line1').val(),
+                        "addressLine2": $('#line2').val(),
+                        "city": $('#city').val(),
+                        "state": $('#state').val(),
+                        "country": $('#country').val(),
+                        "zipcode": $('#zipcode').val()
+                        },
+                    "telephoneNo": $('#mobno').val(),
+                    "bankAccNo": $('#accno').val(),  
+                    "clinicalInfo": $('#clinical_info').val(),
+                    "claimsInfo": $('#claims_info').val(),
+                    };
+                console.log(JSON.stringify(dataOwner));
+                /*var dataProperty = {
+                    "$class": "org.acme.land.registry.Property",
+                    "Address": {
+                        "$class": "org.acme.land.registry.Address",
+                        "city": $('#city').val(),
+                        "country": $('#country').val(),
+                        "street": $('#street').val(),
+                        "zip": $('#zip').val()
+                    },
+                    "Property_id": $('#Property_id').val(),
+                    "Property_type": $('#Property_type').val(),
+                    "Area": $('#Area').val(),
+                    "North": $('#North').val(),
+                    "East": $('#East').val(),
+                    "West": $('#West').val(),
+                    "South": $('#South').val(),
+                    "status": "Owned",
+                    "owner": "org.acme.land.registry.Owner#" + $('#owner_adhar_id').val(),
+                    "Mortgage": JSON.parse( $('#Mortgage').val() )
+                }
+                console.log( JSON.stringify( dataProperty));
+                */
+                
+
+                $.post("http://localhost:3000/api/UserDataPackage",
+                    dataOwner,
+                    function (data, status) {
+                        console.log("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+                    });
+                /*$.post("http://40.83.126.91:3000/api/org.acme.land.registry.Property",
+                            dataProperty,
+                            function (data, status) {
+                                alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+                            });
+                            */
+            });
+        });
+    </script>
+
+
+
+</head>
+<body>
+
+    <div align="center" id="ownerContainer">
+        <h3> User Details </h3>
+
+        User Id :
+        <input type="text" id="userid" />
+        <br />
+
+        Name :
+        <input type="text" id="name" />
+        <br />
+
+        Date Of Birth :
+        <input type="text" id="dob" />
+        <br />
+
+        Social Security No :
+        <input type="text" id="ssno" />
+        <br />
+
+        Member Id :
+        <input type="text" id="memid" />
+        <br />
+
+        Email:
+        <input type="text" id="email" />
+        <br />
+
+        Telephone No :
+        <input type="text" id="mobno" />
+        <br />
+
+        Bank Account No :
+        <input type="text" id="accno" />
+        <br />
+
+        Clinical Info :
+        <input type="text" id="clinical_info" />
+        <br />
+
+        Claims_Info :
+        <input type="text" id="claims_info" />
+        <br />
+
+        
+        <h3> Address Details </h3>
+
+        Address Line 1 :
+        <input align="center" type="text" id="line1" />
+        <br />
+        Address Line 2 :
+        <input type="text" id="line2" />
+        <br />
+        City :
+        <input type="text" id="city" />
+        <br />
+        State :
+        <input type="text" id="state" />
+        <br />
+        Country :
+        <input type="text" id="country" />
+        <br />
+        Zipcode :
+        <input type="text" id="zipcode" />
+        <br />
+        
+        <button id="submitData">Submit </button>
+
+
+    </div>
+
+
+
+</body>
+</html>

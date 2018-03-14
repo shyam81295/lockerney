@@ -105,8 +105,7 @@ transaction grantAccess {
  * This transaction verifies the user data given by the service
  */
 transaction userDataVerification {
-  --> Service service
-  --> User user
+  --> UserServicePair userServicePair
   o VerificationTypeDataPair[] verificationTypeDataPair
   o String details
 }
