@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                var propID = $('#propertyID').val(); 
+                $.get("http://localhost:3000/api/UserServicePair/"+propID,
+                    function (data, status) {
+
+                        var jsonObj = JSON.stringify(data);
+                        console.log(jsonObj);
+                        var parsed_data = JSON.parse(jsonObj);
+                        var serviceAccess = counter.serviceAccess;
+                        if(serviceAccess.name==true)    
+                        {
+                            var x = document.getElementById("form_sample");
+                            var createform = document.createElement('form'); // Create New Element Form
+                            x.appendChild(createform);
+                        }
+                        if(serviceAccess.dateOfBirth==true) serviceAccessCount++;
+                        if(serviceAccess.socialSecurityNo==true)    serviceAccessCount++;
+                        if(serviceAccess.memberIdNo==true)  serviceAccessCount++;
+                        if(serviceAccess.emailAddress==true)    serviceAccessCount++;
+                        if(serviceAccess.mailingAddress==true)  serviceAccessCount++;
+                        if(serviceAccess.telephoneNo==true) serviceAccessCount++;
+                        if(serviceAccess.bankAccNo==true)   serviceAccessCount++;
+                        if(serviceAccess.clinicalInfo==true)    serviceAccessCount++;
+                        if(serviceAccess.claimsInfo==true)  serviceAccessCount++;
+                        //  till now we will get which all data is allowed for service to get
+                        //  from the user, in serviceAccessCount 
+                        
+                         
+
+                        //console.log(parsed_data);
+                        //var data = JSON.parse(result);
+                        //alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+                    });
+            });
+        });
+    </script>
+
+
+
+</head>
+<body>
+    
+
+    <div id="form_sample" align="center">
+    <h1> Verify User Details </h1>
+    
+    <input type="text" id="propertyID" />
+    <br />
+        
+        <button id="btn"> Verify User Details </button>
+
+
+        <!--<p id="content">
+        </p>-->
+
+
+        <!--<button id="btn"> View Property Details </button>-->
+
+
+ 
+    </div>
+
+</body>
+</html>
+
