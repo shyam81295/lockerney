@@ -11,7 +11,7 @@
         $(document).ready(function () {
             $("button").click(function () {
                 var propID = $('#propertyID').val(); 
-                $.get("http://localhost:3000/api/UserServicePair",
+                $.get("http://34.217.37.251:3000/api/UserServicePair",
                     function (data, status) {
                         //$("#content").text(JSON.stringify(data));
                         var jsonArr = JSON.stringify(data);

@@ -8,42 +8,173 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
+        
         $(document).ready(function () {
-            $("button").click(function () {
+            $("#name").hide();
+            $("#dob").hide();
+            $("#ssno").hide();
+            $("#memid").hide();
+            $("#email").hide();
+            $("#address").hide();
+            $("#mobno").hide();
+            $("#accno").hide();
+            $("#clinical_info").hide();
+            $("#claims_info").hide();
+            $("#verify").hide();
+
+            $("#name_text").hide();
+            $("#dob_text").hide();
+            $("#ssno_text").hide();
+            $("#memid_text").hide();
+            $("#email_text").hide();
+            $("#address_text").hide();
+            $("#mobno_text").hide();
+            $("#accno_text").hide();
+            $("#clinical_info_text").hide();
+            $("#claims_info_text").hide();
+
+            $("#button").one("click", function() {
                 var propID = $('#propertyID').val(); 
-                $.get("http://localhost:3000/api/UserServicePair/"+propID,
+                $.get("http://34.217.37.251:3000/api/UserServicePair/"+propID,
                     function (data, status) {
 
                         var jsonObj = JSON.stringify(data);
                         console.log(jsonObj);
                         var parsed_data = JSON.parse(jsonObj);
-                        var serviceAccess = counter.serviceAccess;
+                        console.log(parsed_data);
+                        var serviceAccess = parsed_data.serviceAccess;
+                        console.log(serviceAccess);
+                        var isExtraPresent = false;
                         if(serviceAccess.name==true)    
                         {
-                            var x = document.getElementById("form_sample");
-                            var createform = document.createElement('form'); // Create New Element Form
-                            x.appendChild(createform);
-                        }
-                        if(serviceAccess.dateOfBirth==true) serviceAccessCount++;
-                        if(serviceAccess.socialSecurityNo==true)    serviceAccessCount++;
-                        if(serviceAccess.memberIdNo==true)  serviceAccessCount++;
-                        if(serviceAccess.emailAddress==true)    serviceAccessCount++;
-                        if(serviceAccess.mailingAddress==true)  serviceAccessCount++;
-                        if(serviceAccess.telephoneNo==true) serviceAccessCount++;
-                        if(serviceAccess.bankAccNo==true)   serviceAccessCount++;
-                        if(serviceAccess.clinicalInfo==true)    serviceAccessCount++;
-                        if(serviceAccess.claimsInfo==true)  serviceAccessCount++;
-                        //  till now we will get which all data is allowed for service to get
-                        //  from the user, in serviceAccessCount 
-                        
-                         
+                            console.log("Going in");
 
-                        //console.log(parsed_data);
-                        //var data = JSON.parse(result);
-                        //alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+                            isExtraPresent = true;
+                            
+                            $("#name_text").show();
+                            $("#name").show();
+                        }
+                        if(serviceAccess.dateOfBirth==true)
+                        {
+                            console.log("Going in");
+                            
+                            isExtraPresent = true;
+
+                            $("#dob_text").show();
+                            $("#dob").show();
+                        }
+                        if(serviceAccess.socialSecurityNo==true)
+                        {
+                            console.log("Going in");
+                            
+                            isExtraPresent = true;
+                            
+                            $("#ssno_text").show();
+                            $("#ssno").show();
+                        }
+                        if(serviceAccess.memberIdNo==true)
+                        {
+                            console.log("Going in");
+                            
+                            isExtraPresent = true;
+
+                            $("#memid_text").show();
+                            $("#memid").show();
+                        }
+                        if(serviceAccess.emailAddress==true)
+                        {
+                            console.log("Going in");
+                            
+                            isExtraPresent = true;
+
+                            $("#email_text").show();
+                            $("#email").show();
+                        }
+                        if(serviceAccess.mailingAddress==true)
+                        {
+                            console.log("Going in");
+                            
+                            isExtraPresent = true;
+
+                            $("#address_text").show();
+                            $("#address").show();
+                        }
+                        if(serviceAccess.telephoneNo==true)
+                        {
+                            console.log("Going in");
+                            
+                            isExtraPresent = true;
+
+                            $("#mobno_text").show();
+                            $("#mobno").show();
+                        }
+                        if(serviceAccess.bankAccNo==true)
+                        {
+                            console.log("Going in");
+                            
+                            isExtraPresent = true;
+
+                            $("#accno_text").show();
+                            $("#accno").show();
+                        }
+                        if(serviceAccess.clinicalInfo==true)
+                        {
+                            console.log("Going in");
+                            
+                            isExtraPresent = true;
+
+                            $("#clinical_info_text").show();
+                            $("#clinical_info").show();
+                        }
+                        if(serviceAccess.claimsInfo==true)
+                        {
+                            console.log("Going in");
+                            
+                            isExtraPresent = true;
+
+                            $("#claims_info_text").show();
+                            $("#claims_info").show();
+                        }
+
+                        if(isExtraPresent==true)
+                        {
+                            var breakline = document.createElement("br");
+                            document.getElementById("form_sample").appendChild(breakline);
+
+                            $("#verify").show();
+                        }
                     });
             });
-        });
+
+        $("#verify").click(function () {
+            console.log("AB");
+            var propID = $('#propertyID').val(); 
+            $.get("http://34.217.37.251:3000/api/UserServicePair/"+propID,
+                function (data, status) {
+
+                    var jsonObj = JSON.stringify(data);
+                    console.log(jsonObj);
+                    var parsed_data = JSON.parse(jsonObj);
+                    console.log(parsed_data);
+                    var serviceAccess = parsed_data.serviceAccess;
+                    console.log(serviceAccess);
+
+                    var x = $('#name').val();
+                    console.log(x);
+                    if(x == '')
+                    {
+                        console.log("Aala re!");
+                    }
+                    else
+                    {
+                        console.log("Okay!");
+                    }
+
+
+
+                });
+            });
+    });
     </script>
 
 
@@ -58,9 +189,62 @@
     <input type="text" id="propertyID" />
     <br />
         
-        <button id="btn"> Verify User Details </button>
+    <button id="button"> Verify User Details </button>
+    <br/>
+
+    <h4 id="name_text"> Name </h4>
+
+    <input type="text" id="name" />
+    <br />
+
+    <h4 id="dob_text"> Date of Birth </h4>
+
+    <input type="text" id="dob" />
+    <br />
+
+    <h4 id="ssno_text"> Social Security No </h4>
+
+    <input type="text" id="ssno" />
+    <br />
+
+    <h4 id="memid_text"> Member ID no </h4>
+
+    <input type="text" id="memid" />
+    <br />
+
+    <h4 id="email_text"> Email </h4>
+
+    <input type="text" id="email" />
+    <br />
+
+    <h4 id="address_text"> Mailing Address </h4>
+
+    <input type="text" id="address" />
+    <br />
+
+    <h4 id="mobno_text"> Telephone No </h4>
+
+    <input type="text" id="mobno" />
+    <br />
+
+    <h4 id="accno_text"> Bank Account no </h4>
+
+    <input type="text" id="accno" />
+    <br />
+
+    <h4 id="clinical_info_text"> Clinical info </h4>
+
+    <input type="text" id="clinical_info" />
+    <br />
+
+    <h4 id="claims_info_text"> Claims info </h4>
+
+    <input type="text" id="claims_info" />
+    <br />
 
 
+
+    <button id="verify"> Verify</button>
         <!--<p id="content">
         </p>-->
 
