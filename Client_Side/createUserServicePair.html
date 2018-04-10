@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+
+        
+        $(document).ready(function () {
+            $("button").click(function () {
+                var dataOwner = {
+                    "$class": "org.lockerney.main.UserServicePair",
+                    "userServiceId": $('#userserviceid').val().toString(),
+                    "userId": $('#userid').val().toString(),
+                    "serviceId": $('#serviceid').val().toString(),
+                    "serviceAccess": {
+                        "$class": "org.lockerney.main.ServiceAccess",
+                        "name": $('input[name=name]:checked').val().toString(),
+                        "dateOfBirth": $('input[name=dob]:checked').val().toString(),
+                        "socialSecurityNo": $('input[name=ssno]:checked').val().toString(),
+                        "memberIdNo": $('input[name=memid]:checked').val().toString(),
+                        "emailAddress": $('input[name=email]:checked').val().toString(),
+                        "mailingAddress": $('input[name=address]:checked').val().toString(),
+                        "telephoneNo": $('input[name=mobno]:checked').val().toString(),
+                        "bankAccNo": $('input[name=accno]:checked').val().toString(),
+                        "clinicalInfo": $('input[name=clinical_info]:checked').val().toString(),
+                        "claimsInfo": $('input[name=claims_info]:checked').val().toString()
+                        }
+                    };
+                console.log(JSON.stringify(dataOwner));
+
+                $.post("http://34.217.37.251:3000/api/UserServicePair",
+                    dataOwner,
+                    function (data, status) {
+                        console.log("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+                    });
+                /*$.post("http://40.83.126.91:3000/api/org.acme.land.registry.Property",
+                            dataProperty,
+                            function (data, status) {
+                                alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+                            });
+                            */
+            });
+        });
+    </script>
+
+
+
+</head>
+<body>
+
+    <div align="center" id="ownerContainer">
+        <h3> User Details </h3>
+
+        User - Service Id :
+        <input type="text" id="userserviceid" />
+        <br />
+
+        User Id :
+        <input type="text" id="userid" />
+        <br />
+
+        Service Id :
+        <input type="text" id="serviceid" />
+        <br />
+
+        Name :
+        <form>
+            <input type="radio" name="name" value="true"> True<br>
+            <input type="radio" name="name" value="false" checked> False<br>
+        </form>
+        <br/>
+
+        Date of birth :
+        <form>
+            <input type="radio" name="dob" value="true"> True<br>
+            <input type="radio" name="dob" value="false" checked> False<br>
+        </form>
+        <br/>
+
+        Social Security No :
+        <form>
+                <input type="radio" name="ssno" value="true"> True<br>
+                <input type="radio" name="ssno" value="false" checked> False<br>
+        </form>
+        <br/>
+
+        Member Id :
+        <form>
+                <input type="radio" name="memid" value="true"> True<br>
+                <input type="radio" name="memid" value="false" checked> False<br>
+            </form>
+            <br/>
+
+        Email:
+        <form>
+                <input type="radio" name="email" value="true"> True<br>
+                <input type="radio" name="email" value="false" checked> False<br>
+            </form>
+            <br/>
+
+        Mailing Address :
+        <form>
+            <input type="radio" name="address" value="true"> True<br>
+            <input type="radio" name="address" value="false" checked> False<br>
+        </form>
+        <br/>
+
+        Telephone No :
+        <form>
+                <input type="radio" name="mobno" value="true"> True<br>
+                <input type="radio" name="mobno" value="false" checked> False<br>
+            </form>
+            <br/>
+
+        Bank Account No :
+        <form>
+                <input type="radio" name="accno" value="true"> True<br>
+                <input type="radio" name="accno" value="false" checked> False<br>
+            </form>
+            <br/>
+
+        Clinical Info :
+        <form>
+                <input type="radio" name="clinical_info" value="true"> True<br>
+                <input type="radio" name="clinical_info" value="false" checked> False<br>
+            </form>
+            <br/>
+
+        Claims_Info :
+        <form>
+                <input type="radio" name="claims_info" value="true"> True<br>
+                <input type="radio" name="claims_info" value="false" checked> False<br>
+            </form>
+            <br/>
+        
+        <button id="submitData">Submit </button>
+
+
+    </div>
+
+
+
+</body>
+</html>
