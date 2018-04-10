@@ -16,27 +16,33 @@
             $(document).ready(function () {
                 $("button").click(function () {
                     var dataOwner = {
-                        "$class": "org.lockerney.main.UserServicePair",
-                        "userServiceId": $('#userserviceid').val().toString(),
-                        "userId": $('#userid').val().toString(),
-                        "serviceId": $('#serviceid').val().toString(),
-                        "serviceAccess": {
-                            "$class": "org.lockerney.main.ServiceAccess",
-                            "name": $('input[name=name]:checked').val().toString(),
-                            "dateOfBirth": $('input[name=dob]:checked').val().toString(),
-                            "socialSecurityNo": $('input[name=ssno]:checked').val().toString(),
-                            "memberIdNo": $('input[name=memid]:checked').val().toString(),
-                            "emailAddress": $('input[name=email]:checked').val().toString(),
-                            "mailingAddress": $('input[name=address]:checked').val().toString(),
-                            "telephoneNo": $('input[name=mobno]:checked').val().toString(),
-                            "bankAccNo": $('input[name=accno]:checked').val().toString(),
-                            "clinicalInfo": $('input[name=clinical_info]:checked').val().toString(),
-                            "claimsInfo": $('input[name=claims_info]:checked').val().toString()
-                            }
+                            "$class": "org.lockerney.main.grantAccess",
+                            "userServicePair": {
+                                "$class": "org.lockerney.main.UserServicePair",
+                                "userServiceId": $('#userserviceid').val().toString(),
+                                "userId": $('#userid').val().toString(),
+                                "serviceId": $('#serviceid').val().toString(),
+                                "serviceAccess": {
+                                    "$class": "org.lockerney.main.ServiceAccess",
+                                    "name": $('input[name=name]:checked').val().toString(),
+                                    "dateOfBirth": $('input[name=dob]:checked').val().toString(),
+                                    "socialSecurityNo": $('input[name=ssno]:checked').val().toString(),
+                                    "memberIdNo": $('input[name=memid]:checked').val().toString(),
+                                    "emailAddress": $('input[name=email]:checked').val().toString(),
+                                    "mailingAddress": $('input[name=address]:checked').val().toString(),
+                                    "telephoneNo": $('input[name=mobno]:checked').val().toString(),
+                                    "bankAccNo": $('input[name=accno]:checked').val().toString(),
+                                    "clinicalInfo": $('input[name=clinical_info]:checked').val().toString(),
+                                    "claimsInfo": $('input[name=claims_info]:checked').val().toString()
+                                }
+                            },       
+                            "detail": "details",
+                            "transactionId": "transactionId",
+                            "timestamp": "2018-04-10T17:30:32.132Z"
                         };
                     console.log(JSON.stringify(dataOwner));
     
-                    $.post("http://13.71.22.224:3000/api/UserServicePair",
+                    $.post("http://localhost:3000/api/grantAccess",
                         dataOwner,
                         function (data, status) {
                             console.log("Data: " + JSON.stringify(data) + "\nStatus: " + status);
