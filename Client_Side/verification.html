@@ -1,29 +1,31 @@
-var express = require('express');                                                                                     
-var path = require('path');                                                                                               
-var bodyParser = require('body-parser');                                                                                  
-var AWS = require('aws-sdk');                                                                                             
-var app = express();                                                                                                      
-var request = require('request');
-var cryptico = require('cryptico');                                                                                         
+<!DOCTYPE html>
 
-app.use(bodyParser());
-//Static folder directory for storing css,js
-app.use(express.static(path.join(__dirname,'Client_Side')));
-app.get('/',function(req,res) {
-//cmd.run('openssl rsa -in my-server.key.pem -pubout -out my-server.pub');
-    res.sendFile('index.html');
-    //res.end(JSON.stringify(req.query)
-})
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
 
-// get User & Service Digi Sign from Composer query.
-var userDigiSign = '';
-var serviceDigiSign = '';
-var userServiceId = '';
-var flag = true;
 
-// get proper User and its Service by double-querying the transactions.
-// var userId & serviceId & userDigiSign & serviceDigiSign & userServiceAccess & serviceUserAccess milega.
-$.get("http://13.71.22.224:3000/api/grantAccess?filter[where][userServiceId]="+userServiceId,
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        var cryptico = require('cryptico');
+        $(document).ready(function () {
+            $("button").click(function () {
+                var userServiceId = $('#propertyID').val(); 
+                console.log(userServiceId);
+                // get User & Service Digi Sign from Composer query.
+                var userDigiSign = '';
+                var serviceDigiSign = '';
+                var userServiceId = '';
+                var flag = true;
+                var userId1 = '';
+                var userId2 = '';
+                var serviceId1 = '';
+                var serviceId2 = '';
+
+                // get proper User and its Service by double-querying the transactions.
+                // var userId & serviceId & userDigiSign & serviceDigiSign & userServiceAccess & serviceUserAccess milega.
+                $.get("http://13.71.22.224:3000/api/grantAccess?filter[where][userServiceId]="+userServiceId,
                     function (data, status) {
                         //$("#content").text(JSON.stringify(data));
                         var jsonObj = JSON.stringify(data);
@@ -31,31 +33,62 @@ $.get("http://13.71.22.224:3000/api/grantAccess?filter[where][userServiceId]="+u
                         var parsed_data = JSON.parse(jsonArr);
                         for (var i = 0; i < parsed_data.length; i++) {
                             var counter = parsed_data[i];
-                            $("#content").append("<p> User Id  : " + counter.userId +  ", Service Id : " + counter.serviceId + ", User - Service Id  : " + counter.userServiceId +" </p>");
-                                 /*+ ", Name  : " + counter.name
-                                 + ", Date of Birth  : " + counter.dob
-                                 + ", Social Security No  : " + counter.ssno
-                                 + ", Member ID  : " + counter.memid
-                                 + ", email  : " + counter.email
-                                 + ", Mailing Address  : " + counter.address
-                                 + ", Telephone No  : " + counter.mobno
-                                 + ", Bank Acc No  : " + counter.accno
-                                 + ", Clinical Info  : " + counter.clinical_info
-                                 + ", Claims Info  : " + counter.claims_info +
-                                 " </p>");
-                                 */
-                            //$("#content").append("<p> Service Id  : " + counter.serviceId + " </p>");
-                            //$("#content").append("<p> User - Service Id  : " + counter.userServiceId + " </p>");
-                            console.log(counter.userId);
+                            userId1 = counter.userId;
+                            serviceId1 = counter.serviceId;
+                            userDigiSign = counter.serviceAccessDigiSign;
+                            userServiceAccess = counter.serviceAccess;
+                            console.log(userId1);
+                            console.log(serviceId1);
+                            console.log(userDigiSign);
+                            console.log(userServiceAccess);
                         }
-                        //console.log(parsed_data);
-                        //var data = JSON.parse(result);
-                        //alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+                    });
+
+                $.get("http://13.71.22.224:3000/api/askAccess?filter[where][userServiceId]="+userServiceId,
+                    function (data, status) {
+                        //$("#content").text(JSON.stringify(data));
+                        var jsonObj = JSON.stringify(data);
+                        console.log(jsonArr);
+                        var parsed_data = JSON.parse(jsonArr);
+                        for (var i = 0; i < parsed_data.length; i++) {
+                            var counter = parsed_data[i];
+                            userId2 = counter.userId;
+                            serviceId2 = counter.serviceId;
+                            serviceDigiSign = counter.serviceAccessDigiSign;
+                            serviceUserAccess = counter.serviceAccess;
+                            console.log(userId2);
+                            console.log(serviceId2);
+                            console.log(serviceDigiSign);
+                            console.log(serviceAccessDigiSign);
+                        }
                     });
 
 //  apply verification of DigiSign on its ServiceAccess.
 //  queryUserDigiSign : after applying DigiSign on User's serviceAccess
 //  queryServiceDigiSign : after applying DigiSign on Service's serviceAccess
+
+
+var PassPhrase = "The Moon is a Harsh Mistress."; 
+// The length of the RSA key, in bits.
+var Bits = 1024; 
+var MattsRSAkey = cryptico.generateRSAKey(PassPhrase, Bits);
+var MattsPublicKeyString = cryptico.publicKeyString(MattsRSAkey);       
+console.log('Encrypt with Public');
+msg_addr = cryptico.encrypt(req.body.line1, MattsPublicKeyString);
+//console.log(typeof msg,'\n');
+//console.log('encrypted', msg_addr, '\n');
+
+//console.log('Decrypt with Private');
+//msg = key.decrypt(msg_addr, 'base64', 'utf8');
+//console.log('decrypted', msg_addr, '\n');
+msg_dob =cryptico.encrypt(req.body.dob, MattsPublicKeyString);
+msg_mail =cryptico.encrypt(req.body.email, MattsPublicKeyString);
+msg_name =cryptico.encrypt(req.body.name, MattsPublicKeyString);
+msg_ssn =cryptico.encrypt(req.body.ssno, MattsPublicKeyString);
+msg_tele =cryptico.encrypt(req.body.mobno, MattsPublicKeyString);
+
+
+
 if(userDigiSign == queryUserDigiSign)
 {
     if(serviceDigiSign == queryServiceDigiSign)
@@ -161,3 +194,37 @@ else
     flag = false;
 }
 
+
+            });
+        });
+    </script>
+
+
+
+</head>
+<body>
+
+
+    
+
+    <div align="center" id="display">
+        <h1> View User Details </h1>
+
+
+        <input type="text" id="propertyID" />
+
+        <button id="btn"> View User Details </button>
+
+
+        <p id="content">
+        </p>
+
+
+        <!--<button id="btn"> View Property Details </button>-->
+
+
+ 
+    </div>
+
+</body>
+</html>
