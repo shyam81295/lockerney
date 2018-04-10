@@ -63,97 +63,83 @@
                         }
                     });
 
+if( (user1 == user2) && (serviceId1 == serviceId2) )
+{
+
 //  apply verification of DigiSign on its ServiceAccess.
 //  queryUserDigiSign : after applying DigiSign on User's serviceAccess
 //  queryServiceDigiSign : after applying DigiSign on Service's serviceAccess
 
-
-var PassPhrase = "The Moon is a Harsh Mistress."; 
-// The length of the RSA key, in bits.
-var Bits = 1024; 
-var MattsRSAkey = cryptico.generateRSAKey(PassPhrase, Bits);
-var MattsPublicKeyString = cryptico.publicKeyString(MattsRSAkey);       
-console.log('Encrypt with Public');
-msg_addr = cryptico.encrypt(req.body.line1, MattsPublicKeyString);
-//console.log(typeof msg,'\n');
-//console.log('encrypted', msg_addr, '\n');
-
-//console.log('Decrypt with Private');
-//msg = key.decrypt(msg_addr, 'base64', 'utf8');
-//console.log('decrypted', msg_addr, '\n');
-msg_dob =cryptico.encrypt(req.body.dob, MattsPublicKeyString);
-msg_mail =cryptico.encrypt(req.body.email, MattsPublicKeyString);
-msg_name =cryptico.encrypt(req.body.name, MattsPublicKeyString);
-msg_ssn =cryptico.encrypt(req.body.ssno, MattsPublicKeyString);
-msg_tele =cryptico.encrypt(req.body.mobno, MattsPublicKeyString);
-
-
-
-if(userDigiSign == queryUserDigiSign)
-{
-    if(serviceDigiSign == queryServiceDigiSign)
+    if(userDigiSign == queryUserDigiSign)
     {
-        // Permisision of service is subset of Permission of User.
-        if( (serviceName == true) && (userName == false) )
+        if(serviceDigiSign == queryServiceDigiSign)
         {
-            console.log("permission restricted");
-            flag = false;
-        }
-        else if( (serviceDateOfBirth == true) && (userDateOfBirth == false) )
-        {
-            console.log("permission restricted");
-            flag = false;
-        }
-        else if( (serviceSocialSecurityNo == true) && (userSocialSecurityNo == false) )
-        {
-            console.log("permission restricted");
-            flag = false;
-        }
-        else if( (serviceMemberIdNo == true) && (userMemberIdNo == false) )
-        {
-            console.log("permission restricted");
-            flag = false;
-        }
-        else if( (serviceEmailAddress == true) && (userEmailAddress == false) )
-        {
-            console.log("permission restricted");
-            flag = false;
-        }
-        else if( (serviceMailingAddress == true) && (userMailingAddress == false) )
-        {
-            console.log("permission restricted");
-            flag = false;
-        }
-        else if( (serviceTelephoneNo == true) && (userTelephoneNo == false) )
-        {
-            console.log("permission restricted");
-            flag = false;
-        }
-        else if( (serviceBankAccNo == true) && (userBankAccNo == false) )
-        {
-            console.log("permission restricted");
-            flag = false;
-        }
-        else if( (serviceClinicalInfo == true) && (userClinicalInfo == false) )
-        {
-            console.log("permission restricted");
-            flag = false;
-        }
-        else if( (serviceClaimsInfo == true) && (userClaimsInfo == false) )
-        {
-            console.log("permission restricted");
-            flag = false;
+            // Permisision of service is subset of Permission of User.
+            if( (serviceName == true) && (userName == false) )
+            {
+                console.log("permission restricted");
+                flag = false;
+            }
+            else if( (serviceDateOfBirth == true) && (userDateOfBirth == false) )
+            {
+                console.log("permission restricted");
+                flag = false;
+            }
+            else if( (serviceSocialSecurityNo == true) && (userSocialSecurityNo == false) )
+            {
+                console.log("permission restricted");
+                flag = false;
+            }
+            else if( (serviceMemberIdNo == true) && (userMemberIdNo == false) )
+            {
+                console.log("permission restricted");
+                flag = false;
+            }
+            else if( (serviceEmailAddress == true) && (userEmailAddress == false) )
+            {
+                console.log("permission restricted");
+                flag = false;
+            }
+            else if( (serviceMailingAddress == true) && (userMailingAddress == false) )
+            {
+                console.log("permission restricted");
+                flag = false;
+            }
+            else if( (serviceTelephoneNo == true) && (userTelephoneNo == false) )
+            {
+                console.log("permission restricted");
+                flag = false;
+            }
+            else if( (serviceBankAccNo == true) && (userBankAccNo == false) )
+            {
+                console.log("permission restricted");
+                flag = false;
+            }
+            else if( (serviceClinicalInfo == true) && (userClinicalInfo == false) )
+            {
+                console.log("permission restricted");
+                flag = false;
+            }
+            else if( (serviceClaimsInfo == true) && (userClaimsInfo == false) )
+            {
+                console.log("permission restricted");
+                flag = false;
+            }
+            else
+            {
+                console.log("permissions are proper");
+            }
         }
         else
         {
-            console.log("permissions are proper");
+            console.log("Given Service Digital Signature does not matches with Actual Service Digital Signature");
+            flag = false;
         }
-    }
-    else
-    {
-        console.log("Given Service Digital Signature does not matches with Actual Service Digital Signature");
-        flag = false;
-    }
+} 
+else
+{
+    console.log("User & Service transactions do not match");
+}
 
     //iske baad idhar DB se servicePermissions ka data json format me bhej do!
     var AWS = require('aws-sdk');

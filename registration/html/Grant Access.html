@@ -10,6 +10,47 @@
     
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script>
+
+        
+            $(document).ready(function () {
+                $("button").click(function () {
+                    var dataOwner = {
+                        "$class": "org.lockerney.main.UserServicePair",
+                        "userServiceId": $('#userserviceid').val().toString(),
+                        "userId": $('#userid').val().toString(),
+                        "serviceId": $('#serviceid').val().toString(),
+                        "serviceAccess": {
+                            "$class": "org.lockerney.main.ServiceAccess",
+                            "name": $('input[name=name]:checked').val().toString(),
+                            "dateOfBirth": $('input[name=dob]:checked').val().toString(),
+                            "socialSecurityNo": $('input[name=ssno]:checked').val().toString(),
+                            "memberIdNo": $('input[name=memid]:checked').val().toString(),
+                            "emailAddress": $('input[name=email]:checked').val().toString(),
+                            "mailingAddress": $('input[name=address]:checked').val().toString(),
+                            "telephoneNo": $('input[name=mobno]:checked').val().toString(),
+                            "bankAccNo": $('input[name=accno]:checked').val().toString(),
+                            "clinicalInfo": $('input[name=clinical_info]:checked').val().toString(),
+                            "claimsInfo": $('input[name=claims_info]:checked').val().toString()
+                            }
+                        };
+                    console.log(JSON.stringify(dataOwner));
+    
+                    $.post("http://13.71.22.224:3000/api/UserServicePair",
+                        dataOwner,
+                        function (data, status) {
+                            console.log("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+                        });
+                    /*$.post("http://40.83.126.91:3000/api/org.acme.land.registry.Property",
+                                dataProperty,
+                                function (data, status) {
+                                    alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+                                });
+                                */
+                });
+            });
+        </script>
+    
 <link href="index.css" rel="stylesheet">
 </head>
 <body>
@@ -31,7 +72,7 @@
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" name="userServiceId" id="name"  placeholder="Enter your Name"/>
+                                <input type="text" class="form-control" name="userServiceId" id="userServiceId"  placeholder="Enter your Name"/>
                             </div>
                         </div>
                     </div>
@@ -41,7 +82,7 @@
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" name="userId" id="name"  placeholder="Enter your Id"/>
+                                <input type="text" class="form-control" name="userId" id="userId"  placeholder="Enter your Id"/>
                             </div>
                         </div>
                     </div>
@@ -53,7 +94,7 @@
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" name="serviceId" id="name"  placeholder="Enter your Date of Birth"/>
+                                <input type="text" class="form-control" name="serviceId" id="serviceId"  placeholder="Enter your Date of Birth"/>
                             </div>
                         </div>
                     </div>
@@ -63,7 +104,7 @@
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" name="serviceAccessDigiSign" id="name"  placeholder="Enter your Social Security Number"/>
+                                <input type="text" class="form-control" name="serviceAccessDigiSign" id="serviceAccessDigiSign"  placeholder="Enter your Social Security Number"/>
                             </div>
                         </div>
                     </div>
@@ -75,10 +116,10 @@
             <form>
                 <label for="name" class="cols-sm-2 control-label">Name</label>
                     <div class="radio">
-                  <label><input type="radio" name="username" value="true">True</label>
+                  <label><input type="radio" name="name" value="true">True</label>
                 </div>
                 <div class="radio">
-                  <label><input type="radio" name="username" value="false">False</label>
+                  <label><input type="radio" name="name" value="false">False</label>
                 </div>
             </form>
 
